@@ -1,4 +1,5 @@
-Checklist::Application.routes.draw do
+Rails.application.routes.draw do
+
+  root 'tasks#index'
   resources :tasks
-  root to: 'tasks#index'
 end

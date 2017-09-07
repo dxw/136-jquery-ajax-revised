@@ -1,6 +1,5 @@
 class TasksController < ApplicationController
   def index
-    sleep 1
     @incomplete_tasks = Task.where(complete: false)
     @complete_tasks = Task.where(complete: true)
   end
@@ -10,13 +9,13 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.create!(params[:task])
+    @task = Task.create!(task_params)
     redirect_to tasks_url
   end
 
   def update
     @task = Task.find(params[:id])
-    @task.update_attributes!(params[:task])
+    @task.update_attributes!(task_params)
     redirect_to tasks_url
   end
 
@@ -24,4 +23,9 @@ class TasksController < ApplicationController
     @task = Task.destroy(params[:id])
     redirect_to tasks_url
   end
+
+  def task_params
+    params.require(:task).permit(:complete, :name)
+  end
+
 end
