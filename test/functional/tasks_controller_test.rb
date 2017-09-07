@@ -8,7 +8,7 @@ class TasksControllerTest < ActionController::TestCase
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:tasks)
+    assert_not_nil assigns(:incomplete_tasks)
   end
 
   test "should get new" do
@@ -21,22 +21,12 @@ class TasksControllerTest < ActionController::TestCase
       post :create, task: { complete: @task.complete, name: @task.name }
     end
 
-    assert_redirected_to task_path(assigns(:task))
-  end
-
-  test "should show task" do
-    get :show, id: @task
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, id: @task
-    assert_response :success
+    assert_redirected_to tasks_url
   end
 
   test "should update task" do
     put :update, id: @task, task: { complete: @task.complete, name: @task.name }
-    assert_redirected_to task_path(assigns(:task))
+    assert_redirected_to tasks_url
   end
 
   test "should destroy task" do
