@@ -2,6 +2,10 @@ class TasksController < ApplicationController
   def index
     @incomplete_tasks = Task.where(complete: false)
     @complete_tasks = Task.where(complete: true)
+    if params[:search]
+      @incomplete_tasks = @incomplete_tasks.search(params[:search])
+      @complete_tasks = @complete_tasks.search(params[:search])
+    end
   end
 
   def new
