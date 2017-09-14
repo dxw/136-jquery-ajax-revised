@@ -36,4 +36,19 @@ class TasksControllerTest < ActionController::TestCase
 
     assert_redirected_to tasks_path
   end
+  
+  # Search
+  test "should search list" do
+    # Create some examples
+    Task.create(name: "Batman")
+    Task.create(name: "Robin")
+    Task.create(name: "Batmanuel") # from The Tick, look it up
+    # Search
+    get :index, search: "bat"
+    assert_response :success
+    assert response.body.include? "Batman" # not good enough, will be true
+    assert response.body.include? "Batmanuel" 
+    assert !response.body.include?("Robin")
+  end
+
 end
