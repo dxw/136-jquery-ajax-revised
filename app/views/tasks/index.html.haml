@@ -1,3 +1,7 @@
+.search
+  = form_tag tasks_url, method: :get do
+    = text_field_tag :search, params[:search]
+    = submit_tag "Search"
 %h1 Check List
 = link_to "New Task", new_task_path, id: "new_link"
 %h2 Incomplete Tasks
